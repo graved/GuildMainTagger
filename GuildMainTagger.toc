@@ -1,0 +1,7 @@
+## Interface: 11200
+## Title: Guild Main Tagger
+## Notes: Displays the names of the main characters in guild messages if they are in the officer notes
+## Author: GraveD89
+## Version: 1.0
+## SavedVariables: GuildMainTaggerDB
+GuildMainTagger.lua
