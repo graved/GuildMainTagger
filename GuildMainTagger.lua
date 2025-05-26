@@ -6,8 +6,7 @@ end
 
 GuildMainTagger.mains = GuildMainTaggerDB
 
-function GuildMainTagger:UpdateGuildRoster()
-    DEFAULT_CHAT_FRAME:AddMessage("GuildMainTagger: Update guild roster and main assignments...")
+function GuildMainTagger:UpdateGuildRoster()    
     GuildRoster()
     local numMembers = GetNumGuildMembers()
     for i = 1, numMembers do
@@ -66,7 +65,8 @@ SlashCmdList["GMT"] = function(msg)
 
     local command = string.lower(args[1] or "")
 
-    if command == "update" then        
+    if command == "update" then
+        DEFAULT_CHAT_FRAME:AddMessage("GuildMainTagger: Update guild roster and main assignments...")
         GuildMainTagger:UpdateGuildRoster()
     elseif command == "debug" then
         DEFAULT_CHAT_FRAME:AddMessage("GuildMainTagger: Show current main assignments...")
