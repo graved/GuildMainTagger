@@ -4,7 +4,7 @@ Displays the names of the main characters in guild messages if they are in the o
 
 The officer's notes must have the following structure:
 
-`Twink <name of twink>`
+`Twink <name of main char>`
 
 
 ## Commands
