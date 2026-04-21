@@ -31,29 +31,27 @@ function GuildMainTagger:UpdateGuildRoster()
     GuildMainTaggerDB = self.mains
 end
 
-if not GuildMainTagger_Original_ChatFrame_OnEvent then
-    GuildMainTagger_Original_ChatFrame_OnEvent = ChatFrame_OnEvent
-end
+ChatFrame_AddMessageEventFilter("CHAT_MSG_GUILD", function(self, event, msg, sender, ...)
+    local shortSender = string.gsub(sender, "%-.*", "")
+    local main = GuildMainTagger.mains[shortSender]
 
-function ChatFrame_OnEvent(event)
-    if event == "CHAT_MSG_GUILD" then        
-        if arg1 and arg2 then
-            local shortSender = string.gsub(arg2, "%-.*", "")
-            local main = GuildMainTagger.mains[shortSender]
-
-            if not main then
-                GuildMainTagger:UpdateGuildRoster()
-                main = GuildMainTagger.mains[shortSender]
-            end
-
-            if main and main ~= "" and main ~= shortSender then
-                arg1 = "[" .. main .. "]: " .. arg1
-            end            
-        end
+    if not main then
+        GuildMainTagger:UpdateGuildRoster()
+        main = GuildMainTagger.mains[shortSender]
     end
 
-    GuildMainTagger_Original_ChatFrame_OnEvent(event)
-end
+    if main and main ~= "" and main ~= shortSender then
+        return false, "[" .. main .. "]: " .. msg, sender, ...
+    end
+    return false, msg, sender, ...
+end)
+
+local GuildMainTagger_Frame = CreateFrame("Frame")
+GuildMainTagger_Frame:RegisterEvent("GUILD_ROSTER_UPDATE")
+GuildMainTagger_Frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+GuildMainTagger_Frame:SetScript("OnEvent", function(self, event)
+    GuildMainTagger:UpdateGuildRoster()
+end)
 
 SLASH_GMT1 = "/gmt"
 SlashCmdList["GMT"] = function(msg)
