@@ -1,7 +1,7 @@
 ## Interface: 30300
 ## Title: Guild Main Tagger
-## Notes: Displays the names of the main characters in guild messages if they are in the officer notes
+## Notes: Displays main character names in guild chat. Uses <Main Name> pattern from notes + syncs between addon users.
 ## Author: GraveD89
-## Version: 2.0
+## Version: 3.1
 ## SavedVariables: GuildMainTaggerDB
 GuildMainTagger.lua
